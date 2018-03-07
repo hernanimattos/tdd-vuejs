@@ -1,5 +1,6 @@
 var path = require('path')
 var webpack = require('webpack')
+const nodeExternals = require("webpack-node-externals")
 
 module.exports = {
   entry: './src/main.js',
@@ -105,4 +106,8 @@ if (process.env.NODE_ENV === 'production') {
       minimize: true
     })
   ])
+}
+if (process.env.NODE_ENV === "test") {
+  module.exports.externals = [require("webpack-node-externals")()];
+  module.exports.devtool = "inline-cheap-module-source-map";
 }
